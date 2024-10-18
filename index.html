@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Expert System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <h2>HEALTH QUESTIONAIRE</h2>
+    </nav>
+    
+    <div class="container">
+        <p>{{ question }}</p>
+        <form id="questionForm" action="{{ url_for('answer') }}" method="POST">
+            <input type="hidden" name="question_number" value="{{ question_number }}">
+            <input type="radio" name="answer" value="yes" required> Yes
+            <input type="radio" name="answer" value="no"> No
+        </form>
+    </div>
+
+    <script>
+        // Automatically submit the form after selecting Yes or No
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('questionForm').submit();
+            });
+        });
+    </script>
+</body>
+</html>
